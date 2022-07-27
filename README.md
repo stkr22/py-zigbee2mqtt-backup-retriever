@@ -2,6 +2,12 @@
 
 Goal is to provide a simple way to download and store the base64 encoded zip from Zigbee2MQTT backup function on disk. It first request the zip file from mqtt via sending a message to the topic and then waits for a new message on the respone topic. Once it received the message it decodes it and stored it on disk as a zip file.
 
+You need to set two environment variables:
+
+ZIP_PATH: where to store the zip (defaults to current working directory)
+FILENAME_TEMPLATE: zip filename is created like {FILENAME_TEMPLATE}_DATETIME.zip (defaults to "zigbee2mqtt_backup")
+MQTT_HOST: host address of MQTT where zigbee2mqtt is reachable (defaults to localhost)
+
 Sources:
 
 - <https://stackoverflow.com/questions/22402679/write-decoded-from-base64-string-to-file>

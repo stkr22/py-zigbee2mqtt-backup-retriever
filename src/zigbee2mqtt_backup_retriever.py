@@ -12,7 +12,10 @@ retrieval_end = False
 
 def on_message(client: mqtt.Client, userdata, msg):
     global retrieval_end
-    filepath = os.getenv('ZIP_FILEPATH', f"zigbee2mqtt_backup_{datetime.now().strftime('%Y%m%d%H%M')}.zip")
+    zip_path = os.getenv('ZIP_PATH', os.getcwd())
+    filename_template = os.getenv('FILENAME_TEMPLATE', "zigbee2mqtt_backup")
+    filename = f"{filename_template}_{datetime.now().strftime('%Y%m%d%H%M')}.zip"
+    filepath = os.path.join(zip_path, filename)
     decoded_message = str(msg.payload.decode("utf-8"))
     msg = json.loads(decoded_message)
     if msg["status"].lower() == "ok":
